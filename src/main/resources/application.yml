@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: 
+          uri: 
+          predicates:
+            # - Path=/inventory/**
+        - id:
+          uri: 
+          predicates:
+            # - Path=/payments/**
+        - id: 
+          uri: 
+          predicates:
+            # - Path=/orders/**
