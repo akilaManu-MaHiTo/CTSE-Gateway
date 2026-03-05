@@ -1,13 +1,10 @@
 server:
   port: 8080
 
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://accounts.google.com
+jwt:
+  secret: ${JWT_SECRET:l7o6dF8Zq2B8q2QhP7o5vV9jH1l9N3bC0QyWvE9l8sZbU6dQk1jH9rT5pQ2mX7nC}
 
+spring:
   cloud:
     gateway:
       routes:
@@ -15,26 +12,15 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/inventory/**
-          filters:
-            - StripPrefix=1
-
         - id: payment-service
           uri: http://localhost:8082
           predicates:
             - Path=/payment/**
-          filters:
-            - StripPrefix=1
-
         - id: order-service
           uri: http://localhost:8083
           predicates:
             - Path=/order/**
-          filters:
-            - StripPrefix=1
-
         - id: customer-service
           uri: http://localhost:8084
           predicates:
             - Path=/customer/**
-          filters:
-            - StripPrefix=1
