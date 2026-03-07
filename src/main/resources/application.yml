@@ -1,12 +1,6 @@
-server:
-  port: 8080
-
-jwt:
-  secret: ${JWT_SECRET:l7o6dF8Zq2B8q2QhP7o5vV9jH1l9N3bC0QyWvE9l8sZbU6dQk1jH9rT5pQ2mX7nC}
-
 spring:
   application:
-    name: api-gateway
+    name: API-GATEWAY
   cloud:
     gateway:
       routes:
@@ -27,7 +21,15 @@ spring:
           predicates:
             - Path=/customer/**
 
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:l7o6dF8Zq2B8q2QhP7o5vV9jH1l9N3bC0QyWvE9l8sZbU6dQk1jH9rT5pQ2mX7nC}
+
 eureka:
   client:
+    register-with-eureka: false
+    fetch-registry: true
     service-url:
-      defaultZone: https://ctseserviceregistryapp.purplecoast-1718a0fd.centralindia.azurecontainerapps.io:8761/eureka/
+      defaultZone: https://ctseserviceregistryapp.purplecoast-1718a0fd.centralindia.azurecontainerapps.io/eureka/
