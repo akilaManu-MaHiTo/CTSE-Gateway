@@ -5,22 +5,29 @@ jwt:
   secret: ${JWT_SECRET:l7o6dF8Zq2B8q2QhP7o5vV9jH1l9N3bC0QyWvE9l8sZbU6dQk1jH9rT5pQ2mX7nC}
 
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       routes:
         - id: INVENTORY-SERVICE
-          uri: http://localhost:8081
+          uri: lb://INVENTORY-SERVICE
           predicates:
             - Path=/inventory/**
         - id: PAYMENT-SERVICE
-          uri: http://localhost:8082
+          uri: lb://PAYMENT-SERVICE
           predicates:
             - Path=/payment/**
         - id: ORDER-SERVICE
-          uri: https://ctseorderserviceapp.purplecoast-1718a0fd.centralindia.azurecontainerapps.io
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/orders/**
-        - id: customer-service
-          uri: http://localhost:8084
+        - id: CUSTOMER-SERVICE
+          uri: lb://CUSTOMER-SERVICE
           predicates:
             - Path=/customer/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://ctseserviceregistryapp.purplecoast-1718a0fd.centralindia.azurecontainerapps.io:8761/eureka/
