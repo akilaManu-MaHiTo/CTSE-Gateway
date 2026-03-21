@@ -18,6 +18,7 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
+    // Global error handling filter to log errors and return appropriate responses
     @Bean
     public WebFilter errorLoggingFilter() {
         return (exchange, chain) -> chain.filter(exchange)
